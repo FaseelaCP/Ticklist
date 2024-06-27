@@ -1,0 +1,9 @@
+.blinking-text {
+  animation: blink-animation 1s step-end infinite alternate;
+  color: #fff; /* Initial color (white) */
+}
+
+@keyframes blink-animation {
+  from { color: #fff; } /* Start with white */
+  to { color: #f00; } /* Change to red */
+}
