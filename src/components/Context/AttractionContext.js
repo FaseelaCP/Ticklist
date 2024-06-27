@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect } from "react";
 
 const AttractionContext = createContext({});
 
+const apiKey = process.env.REACT_APP_TICKETMASTER_KEY;
+
 export const AttractionProvider = ({ children }) => {
   const [attractions, setAttractions] = useState(null);
   const [error, setError] = useState(null);
@@ -10,7 +12,7 @@ export const AttractionProvider = ({ children }) => {
     const fetchAttractionDataFromApi = async () => {
       try {
         const response = await fetch(
-          "https://app.ticketmaster.com/discovery/v2/attractions?apikey=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh"
+          `https://app.ticketmaster.com/discovery/v2/attractions?apikey=${apiKey}`
         );
 
         if (!response.ok) {

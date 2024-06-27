@@ -13,7 +13,6 @@ import LoginModal from "../Login/Login";
 import { AuthContext } from "../Context/AuthContext";
 import { useTheme } from "@emotion/react";
 import { Link, useNavigate } from "react-router-dom";
-import Search from "../../pages/Search/pages"; // Import Search component
 
 export default function HeaderNav() {
   const { isLoggedIn, login, logout } = useContext(AuthContext);
@@ -34,7 +33,7 @@ export default function HeaderNav() {
     setSearchEvent(event.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearchClick = () => {
     if (!searchEvent) return; // Prevent empty searches
 
     // Trigger navigation to the Search page with the search term
@@ -67,11 +66,12 @@ export default function HeaderNav() {
             onChange={handleSearchChange}
             InputProps={{
               endAdornment: (
-                <InputAdornment position="end">
-                  <FaSearch style={{ color: "white" }} onClick={handleSearch} />
+                <InputAdornment position="end" onClick={handleSearchClick}>
+                  <FaSearch style={{ color: "white" }}  />
                 </InputAdornment>
               ),
-              style: { color: "white" }, // Apply styles directly to TextField input
+              style: { color: "white" },
+              sx: { cursor: 'pointer' } // Apply styles directly to TextField input
             }}
           />
           {!isLoggedIn && ( // Only show login button if not logged in

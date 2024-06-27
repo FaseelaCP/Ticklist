@@ -16,6 +16,8 @@ import {
 import { useContext } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import TopVenues from "../../components/TopVenues/pages";
+const apiKey=process.env.REACT_APP_TICKETMASTER_KEY;
+const googleAPI=process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
 const VenueDetail = () => {
   const { venueId } = useParams();
@@ -29,7 +31,7 @@ const VenueDetail = () => {
     const fetchVenueById = async () => {
       try {
         const response = await fetch(
-          `https://app.ticketmaster.com/discovery/v2/venues/${venueId}?apikey=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh`
+          `https://app.ticketmaster.com/discovery/v2/venues/${venueId}?apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch venue data");
@@ -39,11 +41,9 @@ const VenueDetail = () => {
         setVenue(venueData);
         if (
           venueData &&
-          venueData._embedded &&
-          venueData._embedded.venues &&
-          venueData._embedded.venues.length > 0
+          venueData.address
         ) {
-          const location = venueData._embedded.venues[0].name;
+          const location = venueData.address.line1;
           setLocation(location);
         }
       } catch (error) {
@@ -88,17 +88,10 @@ const VenueDetail = () => {
         <Typography color="text.primary">{venue.name}</Typography>
       </Breadcrumbs>
 
-      {venue.images && venue.images.length >= 1 && (
-        <Slider
-          dots
-          infinite
-          autoplay
-          autoplaySpeed={3000}
-          style={{ marginBottom: "50px" }}
-        >
-          {venue.images.map((image) => (
+      
+         
             <Box
-              key={image.url}
+              key={venue?.images[0].url}
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -116,14 +109,12 @@ const VenueDetail = () => {
                 <CardMedia
                   component="img"
                   alt={venue.name}
-                  height="600px"
-                  image={image.url}
+                  height="600px" // Set a fixed height for all images, adjust this value as needed
+                  image={venue.images[0].url}
                 />
               </Card>
             </Box>
-          ))}
-        </Slider>
-      )}
+          
 
       <Grid container spacing={2} marginTop={5}>
         <Grid item xs={6}>
@@ -157,15 +148,15 @@ const VenueDetail = () => {
             </Typography>
           )}
 
-          <iframe
-            width="450"
-            height="250"
-            frameBorder="0"
-            style={{ border: "0" }}
-            referrerPolicy="no-referrer-when-downgrade"
-            src={`https://www.google.com/maps/embed/v1/place?key=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh&q=${location}`}
-            allowFullScreen
-          ></iframe>
+<iframe
+  width="450"
+  height="250"
+  frameborder="0" style={{border:"0"}}
+  referrerpolicy="no-referrer-when-downgrade"
+  src={`https://www.google.com/maps/embed/v1/place?key=${googleAPI}&q=`+location}
+  allowfullscreen>
+</iframe>
+
         </Grid>
         <Grid item xs={6}>
           <Box

@@ -58,6 +58,7 @@ const TopCard = ({ event, attraction, venue }) => {
         </Link>
       )}
 
+
       {venue && (
         <Link to={`/venues/${venue.id}`} style={{ textDecoration: 'none', width: '100%' }}>
           <Card sx={{ maxWidth: 345, height: 260, borderRadius: '10px', display: 'flex', flexDirection: 'column' }}>

@@ -23,7 +23,7 @@ export default function CategoryNav() {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-around"}}>
         {categories.map((category, index) => (
           <Tooltip key={index} title={category.label}>
             <IconButton

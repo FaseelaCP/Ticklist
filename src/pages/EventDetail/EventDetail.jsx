@@ -17,7 +17,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import './eventDeatil.css'
 import TopEvents from "../../components/TopEvents/TopEvents";
-
+const apiKey=process.env.REACT_APP_TICKETMASTER_KEY;
+const googleAPI=process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 const EventDetail = () => {
   const { eventId } = useParams();
   const { isLoggedIn } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const EventDetail = () => {
     const fetchEventById = async () => {
       try {
         const response = await fetch(
-          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh`
+          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch event data");
@@ -166,7 +167,7 @@ const EventDetail = () => {
   height="250"
   frameborder="0" style={{border:"0"}}
   referrerpolicy="no-referrer-when-downgrade"
-  src={"https://www.google.com/maps/embed/v1/place?key=AIzaSyDjoibXHGR5OzWEXV87-5EI2pzj74Mb2So&q="+location}
+  src={`https://www.google.com/maps/embed/v1/place?key=${googleAPI}&q=`+location}
   allowfullscreen>
 </iframe>
 

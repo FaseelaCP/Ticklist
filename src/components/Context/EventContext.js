@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 const EventContext = createContext({});
-
+const apiKey = process.env.REACT_APP_TICKETMASTER_KEY;
 export const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
@@ -10,7 +10,7 @@ export const EventProvider = ({ children }) => {
   useEffect(() => {
     const fetchEventDataFromApi = async () => {
       try {
-        const response = await fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh');
+        const response = await fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${apiKey}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

@@ -17,6 +17,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useContext } from "react";
 import { AuthContext } from "../../components/Context/AuthContext";
 import TopAttractions from '../../components/TopAttractions/TopAttractions'
+const apiKey=process.env.REACT_APP_TICKETMASTER_KEY;
 
 const AttractionDetail = () => {
   const { attractionId } = useParams();
@@ -29,7 +30,7 @@ const AttractionDetail = () => {
     const fetchAttractionById = async () => {
       try {
         const response = await fetch(
-          `https://app.ticketmaster.com/discovery/v2/attractions/${attractionId}?apikey=f8NoEtkPderIKMZAOmWbuJd3P6TFhlgh`
+          `https://app.ticketmaster.com/discovery/v2/attractions/${attractionId}?apikey=${apiKey}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch attraction data");

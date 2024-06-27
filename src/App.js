@@ -17,6 +17,7 @@ import VenuesPage from "./pages/Venues/pages";
 import { VenueProvider } from "./components/Context/VenueContext";
 import VenueDetail from './pages/VenueDetail/pages'
 import Footer from "./components/Footer/Footer";
+import Search from './pages/Search/pages'
 
 function App() {
   return (
@@ -38,7 +39,8 @@ function App() {
                   <Route path="/venues" element={<VenuesPage />}></Route>
                   <Route path="/events/:eventId" element={<EventDetail />}></Route>
                   <Route path="/attractions/:attractionId" element={<AttractionDetail />}></Route>
-                  <Route path="/venues/:venuesId" element={<VenueDetail />}></Route>
+                  <Route path="/venues/:venueId" element={<VenueDetail />}></Route>
+                  <Route path="/search" element={<Search/>}></Route>
                 </Routes>
                 <Footer />
               </div>
