@@ -11,7 +11,7 @@ import CategoryNav from '../../components/CategoryNavbar/CategoryNav';
 
 
 const HomePage=()=>{
-  return(<div className='container' style={{height:'100vh'}}>
+  return(<div className='container'>
    <CategoryNav/>
     <MyCarousel />
     <Typography variant="h5" mt={3} mb={2}>
